@@ -10,6 +10,12 @@ To build this project, execute:
 gradlew install
 ```
 
+To execute unit tests, execute:
+
+```
+gradlew test
+```
+
 To run this project, execute:
 
 ```
