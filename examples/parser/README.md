@@ -14,7 +14,7 @@ gradlew install
 To run this project, execute:
 
 ```
-build/install/parser/bin/parser -ds -dt program.tiny
+build/install/parser/bin/parser -ds -dp program.tiny
 ```
 
 ## Project Structure

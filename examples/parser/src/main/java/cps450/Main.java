@@ -27,7 +27,7 @@ public class Main
         for (String arg: arguments) {
         	if (arg.equals("-ds"))
         		debugScanner = true;
-        	else if (arg.equals("-dt"))
+        	else if (arg.equals("-dp"))
         		debugParser = true;
         	else
         		filename = arg;
