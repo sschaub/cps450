@@ -17,7 +17,7 @@ public class Main
         if(arguments.length == 0)
         {
             System.out.println("usage:");
-            System.out.println("  parser -ds -dt <filename>");
+            System.out.println("  parser -ds -dp <filename>");
             System.exit(1);
         }
         
