@@ -31,9 +31,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 grammar Tiny;
 
+@header{ 
+package cps450; 
+} 
+
+
 program
    : 'BEGIN' stmt_list 'END'
    ;
+
 
 stmt_list
    : stmt_list stmt
