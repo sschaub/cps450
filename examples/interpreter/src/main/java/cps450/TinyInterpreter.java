@@ -3,7 +3,6 @@ package cps450;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.Token;
 
 import cps450.TinyParser.AddExprContext;
@@ -23,8 +22,6 @@ public class TinyInterpreter extends TinyBaseListener {
 	Scanner scanner = new Scanner(System.in);
 	
 	HashMap<String, Double> variables = new HashMap<>();
-	
-	HashMap<ParserRuleContext, Double> exprValues = new HashMap<>();
 
 	@Override
 	public void enterStmt(StmtContext ctx) {
@@ -34,8 +31,7 @@ public class TinyInterpreter extends TinyBaseListener {
 	@Override
 	public void exitWrite_stmt(Write_stmtContext ctx) {
 		for (ExprContext expr : ctx.expr_list().exprs) {
-			Object value = exprValues.get(expr);
-			System.out.println(expr.getText() + " = " + value);
+			System.out.println(expr.getText() + " = " + expr.value);
 		}
 	}
 
@@ -52,7 +48,7 @@ public class TinyInterpreter extends TinyBaseListener {
 
 	@Override
 	public void exitAssign_stmt(Assign_stmtContext ctx) {
-		Double value = exprValues.get(ctx.expr());
+		Double value = ctx.expr().value;
 		assert value != null;
 		String id = ctx.ID().getText();
 		variables.put(id,  value);
@@ -60,7 +56,7 @@ public class TinyInterpreter extends TinyBaseListener {
 
 	@Override
 	public void exitParTerm(ParTermContext ctx) {
-		exprValues.put(ctx, exprValues.get(ctx.expr()));
+		ctx.value = ctx.expr().value;
 	}
 
 	@Override
@@ -72,30 +68,30 @@ public class TinyInterpreter extends TinyBaseListener {
 			System.out.println("** WARNING: Undefined identifier " + id + " on Line " + tok.getLine());
 			value = new Double(0);
 		}
-		exprValues.put(ctx, value);
+		ctx.value = value;
 	}
 	
 	@Override
 	public void exitIntTerm(IntTermContext ctx) {
-		exprValues.put(ctx, new Double(ctx.integer().getText()));
+		ctx.value = new Double(ctx.integer().getText());
 	}
 	
 
 	@Override
 	public void exitMulExpr(MulExprContext ctx) {
-		Double value1 = exprValues.get(ctx.expr(0));
-		Double value2 = exprValues.get(ctx.expr(1));
-		exprValues.put(ctx, value1 * value2);
+		Double value1 = ctx.e1.value;
+		Double value2 = ctx.e2.value;
+		ctx.value = value1 * value2;
 	}
 
 	@Override
 	public void exitAddExpr(AddExprContext ctx) {
-		Double value1 = exprValues.get(ctx.e1);
-		Double value2 = exprValues.get(ctx.e2);
+		Double value1 = ctx.e1.value;
+		Double value2 = ctx.e2.value;
 		if (ctx.add_op().getText().equals("+")) {			
-			exprValues.put(ctx, value1 + value2);
+			ctx.value = value1 + value2;
 		} else if (ctx.add_op().getText().equals("-")) {
-			exprValues.put(ctx, value1 - value2);
+			ctx.value = value1 - value2;
 		} else {
 			throw new RuntimeException("Unknown operator type: " + ctx.add_op().getText());
 		}
@@ -103,7 +99,7 @@ public class TinyInterpreter extends TinyBaseListener {
 
 	@Override
 	public void exitTermExpr(TermExprContext ctx) {
-		exprValues.put(ctx,  exprValues.get(ctx.term()));
+		ctx.value = ctx.term().value;
 	}
 
 	

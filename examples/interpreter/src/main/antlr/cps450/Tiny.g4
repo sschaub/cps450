@@ -71,13 +71,13 @@ expr_list
    : exprs+=expr (',' exprs+=expr)*
    ;
 
-expr
+expr returns [Double value]
    : e1=expr mul_op e2=expr  # MulExpr
    | e1=expr add_op e2=expr  # AddExpr
    | term                    # TermExpr
    ;
 
-term
+term returns [Double value]
    : ID            # IdTerm
    | integer       # IntTerm
    | '(' expr ')'  # ParTerm
