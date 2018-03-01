@@ -1,0 +1,25 @@
+class retvalue is
+  x: int
+  y: int
+
+  g(i: int, j: int): int is
+    a: int
+    b: int
+  begin
+    a := 3
+    b := 5
+  
+    g := a + b + i + j  
+  end g 
+
+  start() is
+    result: int
+  begin
+    x := 0
+    y := 5
+    
+    result := g(x, y)
+  
+  end start
+end retvalue
+
