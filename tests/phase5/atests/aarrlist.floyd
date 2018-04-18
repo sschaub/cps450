@@ -4,22 +4,22 @@
 ~ ********************************************
 
 class ListNode is
-  data: ood
+  data: Oyd
   next: ListNode
   
-  init(initData: ood): ListNode is
+  init(initData: Oyd): ListNode is
   begin
     data := initData
     next := null
     init := me
   end init
   
-  getData(): ood is
+  getData(): Oyd is
   begin
     getData := data
   end getData
 
-  setData(newData: ood): ood is
+  setData(newData: Oyd): Oyd is
   begin
     data := newData
   end setData
@@ -46,7 +46,7 @@ class List is
   head: ListNode  ~ points to first node in List
   
   ~ adds <item> to end of this List
-  add(item: ood): List is
+  add(item: Oyd): List is
     curnode: ListNode
     node: ListNode
   begin
@@ -65,7 +65,7 @@ class List is
   end add
   
   ~ returns item at position <index> in this List, or null if <index> is out of bounds
-  get(index: int): ood is
+  get(index: int): Oyd is
     curNode: ListNode
   begin
     curNode := head
@@ -121,7 +121,7 @@ class List is
   
   ~ changes item at position <index> to <item>
   ~ does nothing if <index> is out of range
-  set(index: int; item: ood) is
+  set(index: int; item: Oyd) is
     curNode: ListNode
   begin
     curNode := head

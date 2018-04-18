@@ -68,7 +68,7 @@ class ATest2 is
     emp: Employee
     sEmp: SalariedEmployee
     p: Point
-    o: ood
+    o: Oyd
   begin
     emp := (new Employee).initEmp(30)
     out.writeint(emp.getSalary())

@@ -3,14 +3,14 @@
 ~ An implementation of the Floyd Predefined classes
 ~ ---------------------------------------------------------
 
-class floyd is
+class Oyd is
 
   toString(): string is
   begin
     toString := "none"
   end toString
 
-end floyd
+end Oyd
 
 ~ ********************************************
 ~  CharNode is used internally by the String class
